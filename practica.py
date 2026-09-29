@@ -6,23 +6,23 @@ puede alcanzar la cantidad exacta, se sube a la cantidad mas cercana por arriba.
 Todos los importes se manejan en centimos (enteros) para evitar errores de decimales.
 """
 
-# Existencias disponibles: {valor en centimos: unidades en caja}
+
 STOCK = {
-    50000: 2,   # 500 EUR
-    20000: 3,   # 200 EUR
-    10000: 5,   # 100 EUR
-    5000: 5,    # 50 EUR
-    2000: 10,   # 20 EUR
-    1000: 10,   # 10 EUR
-    500: 10,    # 5 EUR
-    200: 20,    # 2 EUR
-    100: 20,    # 1 EUR
-    50: 20,     # 0,50 EUR
-    20: 20,     # 0,20 EUR
-    10: 20,     # 0,10 EUR
-    5: 20,      # 0,05 EUR
-    2: 20,      # 0,02 EUR
-    1: 20,      # 0,01 EUR
+    50000: 2,   
+    20000: 3,   
+    10000: 5,   
+    5000: 5,    
+    2000: 10,   
+    1000: 10,   
+    500: 10,    
+    200: 20,    
+    100: 20,    
+    50: 20,     
+    20: 20,     
+    10: 20,     
+    5: 20,      
+    2: 20,      
+    1: 20,      
 }
 
 
@@ -83,9 +83,9 @@ def nombre(d):
 
 
 def main():
-    print("=== Cambio de monedas y billetes ===")
+    print("Cambio de monedas y billetes")
     while True:
-        entrada = input("\nIntroduce una cantidad en euros (o 'salir'): ")
+        entrada = input("\nIntroduce una cantidad en euros o salir para salir del código: ")
         if entrada.strip().lower() in ("salir", "s", "q"):
             print("Hasta luego.")
             break
