@@ -1,21 +1,12 @@
-"""
-Cambio de monedas y billetes con existencias limitadas.
-
-Recorre las denominaciones de mayor a menor. Si con las existencias no se
-puede alcanzar la cantidad exacta, se sube a la cantidad mas cercana por arriba.
-Todos los importes se manejan en centimos (enteros) para evitar errores de decimales.
-"""
-
-
 STOCK = {
-    50000: 2,   
-    20000: 3,   
-    10000: 5,   
-    5000: 5,    
-    2000: 10,   
-    1000: 10,   
-    500: 10,    
-    200: 20,    
+    50000:10000,   
+    20000: 52222222,   
+    10000: 9856666,   
+    5000: 5555555,    
+    2000: 10000,   
+    1000: 666666,   
+    500: 100000,    
+    200: 200000,    
     100: 20,    
     50: 20,     
     20: 20,     
@@ -27,7 +18,6 @@ STOCK = {
 
 
 def a_centimos(texto):
-    """Convierte '12,34' o '12.34' a centimos (1234). Lanza ValueError si no es valido."""
     texto = texto.strip().replace(",", ".")
     if texto.count(".") > 1:
         raise ValueError("formato incorrecto")
@@ -40,28 +30,20 @@ def a_centimos(texto):
 
 
 def formatear(centimos):
-    """1234 -> '12,34 EUR'"""
     return f"{centimos // 100},{centimos % 100:02d} EUR"
 
 
 def calcular_cambio(cantidad, stock):
-    """
-    Devuelve (entregado, total) o None si no hay existencias suficientes.
-    entregado: {denominacion: unidades}
-    total: importe realmente alcanzado (>= cantidad)
-    """
+    
     entregado = {}
     restante = cantidad
 
-    # 1. De mayor a menor, tomando lo que quepa y lo que haya en caja
     for d in sorted(stock, reverse=True):
         n = min(restante // d, stock[d])
         if n > 0:
             entregado[d] = n
             restante -= n * d
 
-    # 2. Si sobra algo, se sube a la cantidad mas cercana por arriba:
-    #    la menor denominacion disponible que cubra lo que falta
     if restante > 0:
         candidatas = [
             d for d in stock
@@ -71,7 +53,7 @@ def calcular_cambio(cantidad, stock):
             return None
         d = min(candidatas)
         entregado[d] = entregado.get(d, 0) + 1
-        restante -= d  # queda negativo: es lo que se pasa
+        restante -= d  
 
     total = cantidad - restante
     return entregado, total
@@ -87,7 +69,7 @@ def main():
     while True:
         entrada = input("\nIntroduce una cantidad en euros o salir para salir del código: ")
         if entrada.strip().lower() in ("salir", "s", "q"):
-            print("Hasta luego.")
+            print("Hasta luego Fausto.")
             break
 
         try:
